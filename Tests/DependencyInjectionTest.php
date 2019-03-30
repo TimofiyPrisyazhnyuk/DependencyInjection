@@ -2,14 +2,22 @@
 
 namespace DependencyInjection\Tests;
 
-use DependencyInjection\DatabaseConfiguration;
-use DependencyInjection\DatabaseConnection;
+use DatabaseConfiguration;
+use DatabaseConnection;
 
-require __DIR__ . '/../DatabaseConfiguration.php';
-require __DIR__ . '/../DatabaseConnection.php';
+spl_autoload_register(function ($class) {
+    include __DIR__ . '/../' . $class . '.php';
+});
 
+/**
+ * Class DependencyInjectionTest
+ * @package DependencyInjection\Tests
+ */
 class DependencyInjectionTest
 {
+    /**
+     * Test DependDependency Injection.
+     */
     public function testDependencyInjection()
     {
         $config = new DatabaseConfiguration('localhost', 3306, 'domnikl', '1234');
@@ -18,4 +26,5 @@ class DependencyInjectionTest
     }
 }
 
+// Run test
 (new DependencyInjectionTest())->testDependencyInjection();
